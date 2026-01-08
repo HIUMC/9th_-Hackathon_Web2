@@ -17,12 +17,14 @@ const CategoryCard = ({
     <div
       className={[
         "w-[234px]",
+        "shrink-0",
         "flex flex-col items-start gap-[10px]",
         "rounded-[8px] border bg-white",
         "px-[28px] py-[24px]",
         borderClassName,
       ].join(" ")}
     >
+      {/* 내부 코드는 동일 */}
       <div className="flex w-full items-center justify-between">
         <div className="flex items-center gap-2 text-800 text-[14px] font-semibold">
           {icon ? (

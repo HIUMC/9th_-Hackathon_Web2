@@ -5,6 +5,10 @@ import IconLight from "../assets/icons/icon_light.svg?react";
 import CategoryCard from "../components/CategoryCard";
 import Footer from "../components/Footer";
 import { useThemeStore } from "../stores/useThemeStore";
+import { useModalActions } from "../hooks/useModalStore";
+import CategoryAddModal from "../components/Modals/CategoryAddModal";
+import CategoryDeleteModal from "../components/Modals/CategoryDeleteModal";
+import DeleteAllModal from "../components/Modals/DeleteAllModal";
 
 type Category = {
   label: string;
@@ -14,6 +18,7 @@ type Category = {
 const SettingPage = () => {
   const theme = useThemeStore((state) => state.mode);
   const setTheme = useThemeStore((state) => state.setMode);
+  const { openModal } = useModalActions();
 
   const categories = useMemo<Category[]>(
     () => [
@@ -33,18 +38,32 @@ const SettingPage = () => {
   );
 
   const renderDeleteAction = (label: string) => (
-    <button type="button" className="text-400 hover:text-600" aria-label={`${label} 삭제`}>
+    <button 
+      type="button" 
+      className="text-400 hover:text-600" 
+      aria-label={`${label} 삭제`}
+      onClick={() => openModal('categoryDelete')}
+    >
       삭제
     </button>
   );
 
+  const handleDeleteAll = () => {
+    openModal('deleteAll');
+  };
+
+  const handleAddCategory = () => {
+    openModal('categoryAdd');
+  };
+
   return (
-    <div className="w-full h-full bg-100 px-8 pt-8 pb-10">
-      <div className="w-full max-w-[980px]">
+    <div className="w-full h-full bg-100 px-8 pt-8 pb-10 overflow-y-auto"> {/* 스크롤 가능하게 overflow-y-auto 추가 */}
+      <div className="w-full max-w-[980px] mx-auto"> {/* mx-auto로 중앙 정렬 */}
         <h1 className="text-900 text-[24px] font-semibold">설정</h1>
 
+        {/* 다크모드 섹션 */}
         <section className="mt-8 flex items-start gap-10">
-          <h2 className="w-[140px] text-600 text-[14px] font-semibold">다크모드 설정</h2>
+          <h2 className="w-[140px] text-600 text-[14px] font-semibold shrink-0">다크모드 설정</h2>
           <div className="flex items-center gap-3">
             <div className="inline-flex rounded-[10px] bg-white border border-200 overflow-hidden">
               <button
@@ -81,10 +100,12 @@ const SettingPage = () => {
           </div>
         </section>
 
+        {/* 전체 삭제 섹션 */}
         <section className="mt-8 flex items-start gap-10">
-          <h2 className="w-[140px] text-600 text-[14px] font-semibold">전체 내역 삭제</h2>
+          <h2 className="w-[140px] text-600 text-[14px] font-semibold shrink-0">전체 내역 삭제</h2>
           <button
             type="button"
+            onClick={handleDeleteAll} // 연결됨
             className={[
               "h-[42px] px-4 rounded-[10px]",
               "inline-flex items-center gap-2",
@@ -97,10 +118,11 @@ const SettingPage = () => {
           </button>
         </section>
 
+        {/* 카테고리 설정 섹션 */}
         <section className="mt-10 flex items-start gap-10">
-          <h2 className="w-[140px] text-600 text-[14px] font-semibold">카테고리 설정</h2>
+          <h2 className="w-[140px] text-600 text-[14px] font-semibold shrink-0">카테고리 설정</h2>
           <div className="flex-1">
-            <div className="grid grid-cols-4 gap-3">
+            <div className="flex flex-wrap gap-3">
               {categories.map((category) => (
                 <CategoryCard
                   key={category.label}
@@ -109,10 +131,13 @@ const SettingPage = () => {
                   action={renderDeleteAction(category.label)}
                 />
               ))}
+              
+              {/* 추가 버튼 */}
               <button
                 type="button"
+                onClick={handleAddCategory} // 연결됨
                 className={[
-                  "w-[234px]",
+                  "w-[234px] shrink-0", // shrink-0 필수
                   "flex items-center justify-center",
                   "rounded-[8px] border border-200 bg-white",
                   "px-[28px] py-[24px]",
@@ -130,6 +155,9 @@ const SettingPage = () => {
       <footer className="mt-10">
         <Footer />
       </footer>
+      <CategoryAddModal />
+      <CategoryDeleteModal />
+      <DeleteAllModal />
     </div>
   );
 };

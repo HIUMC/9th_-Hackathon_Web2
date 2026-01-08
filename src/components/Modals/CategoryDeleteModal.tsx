@@ -18,14 +18,14 @@ const CategoryDeleteModal = () => {
       onClose={closeModal}
       title={
         <span>
-          <span className="text-eat">{categoryToDelete?.name || '식비'}</span> 카테고리 삭제
+          <span className="text-eat">{categoryToDelete?.name}</span> 카테고리 삭제
         </span>
       }
       width="w-[432px]"
     >
       <div className="flex flex-col items-center gap-6">
         <p className="text-color-900 text-center">
-          <span className="text-eat font-semibold">{categoryToDelete?.name || '식비'}</span> 카테고리를 정말 삭제하시겠습니까?
+          <span className="text-eat font-semibold">{categoryToDelete?.name}</span> 카테고리를 정말 삭제하시겠습니까?
         </p>
 
         <div className="flex gap-3 w-full">
