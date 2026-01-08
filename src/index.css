@@ -23,3 +23,14 @@
   --color-eat: #F2A44B;
   --color-finance: #42C563;
 }
+
+:root.dark {
+  --color-white: #0F1115;
+  --color-100: #14171D;
+  --color-200: #1E222A;
+  --color-400: #4B5160;
+  --color-600: #A7ADBA;
+  --color-800: #E1E5ED;
+  --color-900: #F5F6FA;
+  --color-mainvariant: #2E3773;
+}

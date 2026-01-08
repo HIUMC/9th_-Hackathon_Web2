@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-import wallet from "../assets/icons/material-symbols_wallet.svg";
+import wallet from "../assets/icons/icon_material_symbols_wallet.svg";
 
 const LoginPage = () => {
   const [nickname, setNickname] = useState("");
