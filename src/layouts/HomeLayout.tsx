@@ -1,11 +1,11 @@
 import NavBar from "../components/NavBar";
 import { Outlet } from "react-router-dom";
 import Footer from "../components/Footer";
-import SideBar from "../components/SIdeBar";
+import SideBar from "../components/SideBar";
 
 const HomeLayout = () => {
   return (
-    <div>
+    <div className="h-dvh flex flex-col">
       <nav>
         <NavBar />
       </nav>
